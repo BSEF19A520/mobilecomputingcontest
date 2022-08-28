@@ -132,6 +132,26 @@ public class MainActivity extends AppCompatActivity {
             "Al-Falaq ",
             "Al-Nas ",
     };
-
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        for (int i = 0; i < 114; i++) {
+            surahnames.add(englishSurahNames[i]);
+        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, surahnames);
+        listview = findViewById(R.id.surahlist);
+        listview.setAdapter(arrayAdapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                //Toast.makeText(MainActivity.this, "I clicked: " + adapterView.getItemIdAtPosition(position), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SurahContent.class);
+//                int x=(int)adapterView.getItemIdAtPosition(position);
+                String s = String.valueOf(adapterView.getItemIdAtPosition(position));
+//                Toast.makeText(MainActivity.this, "I clicked: " + x, Toast.LENGTH_SHORT).show();
+                intent.putExtra("Surah_number", s);
+                startActivity(intent);
+            }
+        });
+    }
     }
